@@ -16,4 +16,5 @@ def euler2(limit):
         a = b
         b = c
     # print(euler_list)
+    # print(sum(filter(lambda x: x%2 == 0,euler_list[:-1])))
     print(total)
