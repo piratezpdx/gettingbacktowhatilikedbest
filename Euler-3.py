@@ -1,7 +1,7 @@
 # What is the largest prime factor of the number 600851475143
 
 def prime_factor_finder(num):
-    print(num)
+    # print(num)
     factors_found = set()
     found = False
     for denom in range(2,num):
