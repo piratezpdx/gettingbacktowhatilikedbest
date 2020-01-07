@@ -1,4 +1,4 @@
-# What is the largest prime factor of the number 600851475143
+# find prime factors of the a number 
 
 def prime_factor_finder(num):
     # print(num)
