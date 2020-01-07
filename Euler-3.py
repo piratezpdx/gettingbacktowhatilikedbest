@@ -1,4 +1,4 @@
-# find prime factors of the a number 
+# find prime factors of a number 
 
 def prime_factor_finder(num):
     # print(num)
