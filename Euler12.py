@@ -1,20 +1,26 @@
-# result is used to decrease number of computations required to come up with a list of factors
-def find_factors(number):
-    counter = 0
-    result = number
-    factors = set() 
-    keep_looking = True
+# basically an increased version of prime_find_factors that finds prime factors and
+# then ...
+def find_factors(num):
+    factors_found = set()
 
-    while keep_looking:
-        counter += 1
-        if counter > result:
-            keep_looking = False
-        if number % counter == 0:
-            result = int(number/counter)
-            factors.add(result)
-            factors.add(counter)
+    found = False
+    for denom in range(2,num):
+        if num % denom == 0:
+            found = True
+            factors_found = (find_factors(int(num/denom)))
+            factors_found.add(denom)
+            break
 
-    return factors
+    if not found:
+        # factors_found.add(num) - from finding primes
+        factors_found.add(1) # include 1 as a factor per the problem specs
+
+    # ... when done finding primes, look for additional factors based on primes found
+    factors_found.add(num)
+    additional_factors = [ int(num/factor) for factor in factors_found ]
+    for factor in additional_factors:
+        factors_found.add(factor)
+    return factors_found
 
 
 
@@ -36,4 +42,23 @@ def euler12(number_of_divisors):
             print(".", end = ' ')
     print(f"\nNumber of divisors: {len(triangle_divisors)}, triangle number: {triangle_number}, triangle counter: {triangle_counter}")
 
-euler12(501)
+# euler12(501)
+
+
+def unit_test_for_find_factors():
+    if find_factors(16) != {1, 2, 4, 8, 16}:
+        print(f'find_factors(16) yields: {find_factors(16)}')
+    if find_factors(99) != {1, 3, 9, 11, 33, 99}:
+        print(f'find_factors(99) yields: {find_factors(99)}')
+    if find_factors(12) != {1, 2, 3, 4, 6, 12}:
+        print(f'find_factors(12) yields: {find_factors(12)}')
+    if find_factors(15) != {1, 3, 5, 15}:
+        print(f'find_factors(15) yields: {find_factors(15)}')
+    if find_factors(32) != {1, 2, 4, 8, 16, 32}:
+        print(f'find_factors(32) yields: {find_factors(32)}')
+    if find_factors(24) != {1, 2, 3, 4, 6, 8, 12, 24}:
+        print(f'find_factors(24) yields: {find_factors(24)}')
+    if find_factors(144) != {1,2,3,4,6,8,9,12,16,18,24,36,48,72,144}:
+        print(f'find_factors(24) yields: {find_factors(144)}')
+    if find_factors(10) != {1, 2, 5, 10}:
+        print(f'find_factors(10) yields: {find_factors(10)}')
