@@ -1,10 +1,14 @@
-# find prime factors of a number 
+'''
+euler 3
+'''
 
 def prime_factor_finder(num):
-    # print(num)
+    '''
+    recursively find prime factors of a number
+    '''
     factors_found = set()
     found = False
-    for denom in range(2,num):
+    for denom in range(2, num):
         if num % denom == 0:
             found = True
             factors_found = (prime_factor_finder(int(num/denom)))
