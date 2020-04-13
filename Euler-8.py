@@ -1,8 +1,15 @@
-# https://projecteuler.net/problem=8
-# Find the thirteen adjacent digits in the 1000-digit
-# number that have the greatest product. What is the value of this product?
+'''
+Euler 8
+Find the thirteen adjacent digits in the 1000-digit
+number that have the greatest product. What is the value of this product?
+'''
+
 def euler8():
-    number_string ='''
+    '''
+    step through the number string one number at a time, looking forward 13 numbers.
+    '''
+
+    number_string = '''
 73167176531330624919225119674426574742355349194934
 96983520312774506326239578318016984801869478851843
 85861560789112949495459501737958331952853208805511
@@ -24,12 +31,13 @@ def euler8():
 05886116467109405077541002256983155200055935729725
 71636269561882670428252483600823257530420752963450
 '''
-    number_string = number_string.replace("\n","")
+    number_string = number_string.replace("\n", "")
     total = 0
     current = []
     winning = [] # don't actually need this, but no trouble to grab it
-    for index in range(0,len(number_string)-13): # since a string length is 13, we don't want to go past the end
-        current = [ int(x) for x in number_string[index:index+13] ]
+    for index in range(0, len(number_string)-13):
+        # since a string length is 13, we don't want to go past the end
+        current = [int(x) for x in number_string[index:index+13]]
         temp = 1
         for value in current:
             temp *= value
