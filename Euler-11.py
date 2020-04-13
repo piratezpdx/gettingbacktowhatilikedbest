@@ -1,11 +1,16 @@
+'''
 # for a 20x20 grid of numbers find the greatest product of four numbers that occurs
 # vertically, horizontally, diagonally; wrapping is disallowed
+# invoke using: euler11()
+'''
 
 from functools import  reduce
 
-# repetitive comparison of product of list of numbers we have v. existing product
-# performed for numbers across, down, diag up, and diag down
 def compare(existing_total, candidate_list):
+    '''
+    # repetitive comparison of product of list of numbers we have v. existing product
+    # performed for numbers across, down, diag up, and diag down
+    '''
     total = reduce(lambda x, y: x * y, candidate_list)
     if existing_total > total:
         return existing_total
@@ -13,6 +18,13 @@ def compare(existing_total, candidate_list):
 
 
 def euler11():
+    '''
+    # builds a matrix from the data for geographic purposes since computations
+    # must be performed diagonally, it is easier to reference and visualize
+    # although the use of magic numbers exists that is because this is a
+    # single use program with specific instructions for solving the problem
+    # with a one time piece of single use data
+    '''
 
     data = '''08 02 22 97 38 15 00 40 00 75 04 05 07 78 52 12 50 77 91 08
 49 49 99 40 17 81 18 57 60 87 17 40 98 43 69 48 04 56 62 00
@@ -35,23 +47,21 @@ def euler11():
 20 73 35 29 78 31 90 01 74 31 49 71 48 86 81 16 23 57 05 54
 01 70 54 71 83 51 54 69 16 92 33 48 61 43 52 01 89 19 67 48'''
     data = data.split()
-    data = [ int(x) for x in data ]
+    data = [int(x) for x in data]
 
-    # build 20 lists ( a row ) of length 20 and fill them with the numbers from data
+    # build 20 lists ( a row ) of length 20 and then fill them with the numbers from data
     # so that geometric navigation is more readily apparent
-    rows = [ [] for num in range (1,21) ]
-    row_entry = 0
-    count = 0
-    for number in data:
-        rows[row_entry].append(number)
-        count += 1
-        if count % 20 == 0:
+    rows = [[] for num in range(1, 21)]
+    row_entry = -1
+    for index, number in enumerate(data):
+        if index % 20 == 0:
             row_entry += 1
+        rows[row_entry].append(number)
 
     winning_total = 0
 
-    for row in range (0,20):
-        for index in range (0,20):
+    for row in range(0, 20):
+        for index in range(0, 20):
             # check horizontal
             if index < 17:
                 temp_numbers = rows[row][index:index+4]
@@ -73,4 +83,3 @@ def euler11():
                 winning_total = compare(winning_total, temp_numbers)
 
     print(winning_total)
-euler11()
