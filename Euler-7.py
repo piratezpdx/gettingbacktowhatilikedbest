@@ -12,7 +12,7 @@ def euler7(num):
     '''
     prime_list = [2]
     # we only need odd numbers, we can still sieve by value of number
-    sieve = [x for x in range(3, num, 2)]
+    sieve = list(range(3, num, 2))
 
     for index in range(len(sieve)):
         # we can't use enumerate because we are modifying the sieve on the fly
